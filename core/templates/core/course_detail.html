@@ -1,0 +1,115 @@
+{% extends './base.html' %}
+
+
+<!-- STYLE BLOCK -->
+{% block style %}
+<style>
+    h2{
+        font-size: 27px;
+    }
+    /* style for coupon code box  */
+    .coupon_code_box {
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 2px;
+        max-width: 90%;
+        margin: auto;
+        background-color: #61CE70;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: center;
+        text-shadow: 1px 1px 2px white, 0 0 25px yellow, 0 0 5px yellow;
+    }
+
+    /* style for right side */
+    .offerbox-div {
+        border: 2px solid black;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .offerbox-div::after {
+        position: absolute;
+        content: "";
+    }
+
+    /* style for course details - left side */
+    .detail_view_heading{
+        color: #6EC1E4;
+    }
+</style>
+{% endblock style %}
+
+
+
+<!-- TITLE -->
+{% block title %}{{course.title}}{% endblock title %}
+
+
+<!-- NAVBAR -->
+{% block navbar %}
+{% include './components/navbar.html' %}
+{% endblock navbar %}
+
+
+<!-- BODY CONTENT - COURSE DETAIL -->
+{% block body_content %}
+<div class="container">
+
+    <div class="row">
+        <!-- COURSE DETAILS - TITLE 
+        .then THUMBNAIL, WHAT YOU WILL LEARN 
+        .then ORIGINAL PRICE, COUPON CODE, ENROLL URL -->
+        <div class="col-sm-8 mx-auto">
+            <h1>{{course.title}} [100% off coupon code]</h1>
+            <div class="row">
+                <div class="col-sm-6 p-3 border border-dark" style="background-color: rgba(239, 242, 237, 0.52);border-radius: 10px;">
+                    <img src="{{course.thumbnail}}" alt="Course Image" width="100%">
+                    <h2 class="detail_view_heading  mt-4">What you'll learn :</h2>
+                    <div>
+                        <p>{{course.what_you_will_learn|safe}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h2 class="detail_view_heading">Course Price :</h2>
+                    <h2 class="detail_view_heading_black">{{course.original_price}} Discount 100% off</h2>
+                    <h2 class="detail_view_heading">Apply this Coupon :</h2>
+                    <h2>
+                        <div class="coupon_code_box">
+                            <span class="animated swing infinite">{{course.coupon_code}}</span>
+                        </div>
+                    </h2>
+                    <h2 class="detail_view_heading">Course Link :</h2>
+                    <div class="d-flex">
+                        <a href="{% url 'redirect_to_course' course.model_title %}" class="btn btn-success mx-auto">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECOMMENDED FOR YOU -->
+        <div class="col-sm-3">
+            <div class="offerbox-div mt-4">
+                <span>100% off Coupon</span>
+            </div>
+            {% for rec_course in recommended %}
+            {% if rec_course != course %}
+            {% include './components/course_card.html' with course=rec_course only %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+    </div>
+    
+    <!-- RECOMMENDED FOR YOU AGAIN -->
+    <div class="row mt-4">
+        <div class="col-md-11 m-auto">
+            <h2>RECOMMENDED FOR YOU</h2>
+        </div>
+        {% for rec_course in recommended %}
+        {% if rec_course != course %}
+        {% include './components/course_card.html' with course=rec_course only %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock body_content %}

@@ -1,0 +1,16 @@
+<a href="{% url 'course_detail' course.model_title %}" class="course-card-link col-sm-5 col-xs-12 m-auto">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4" style="display: flex;align-items: center;">
+      <img src="{{course.thumbnail}}" class="card-img" alt="{{course.title}}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{course.title}}</h5>
+        {% comment %} <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> {% endcomment %}
+        <p class="card-text"><small class="text-muted">{{course.last_updated}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+</a>
