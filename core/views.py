@@ -8,11 +8,13 @@ import os # for env
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.views.decorators.cache import cache_page
 
 
 
 # HOME PAGE VIEW
 # CHECK FOR CATEGORY AND SEARCH REQUEST BOTH 
+@cache_page(60*60*24)
 def index(request, category=None, search=None):
     # cache sql queries for 12 hrs according to category
     if category == None:
@@ -39,6 +41,7 @@ def index(request, category=None, search=None):
 
 
 # COURSE DETAIL VIEW 
+@cache_page(60*60*24)
 def CourseView(request, model_title):
     course                      = Udemy_Course.objects.get(model_title=str(model_title))
     course.what_you_will_learn  = str(course.what_you_will_learn).replace('\n', '<br>').replace('\\n', '<br>')
