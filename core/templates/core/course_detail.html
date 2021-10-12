@@ -1,6 +1,19 @@
 {% extends './base.html' %}
 
 
+<!-- HOME PAGE STYLE -->
+{% block meta %}
+<meta name="title" content="[100% Off] {{course.title}} - Online Coupon Kit"/>
+<meta property="og:title" content="[100% Off] {{course.title}} - Online Coupon Kit"/>
+<meta name="description" content="{{course.description}} - 100 % free coupon code - Online Coupon Kit"/>
+<meta property="og:description" content="{{course.description}} - 100 % free coupon code - Online Coupon Kit"/>
+{% endblock meta %}
+
+
+<!-- TITLE -->
+{% block title %}[100% Off] {{course.title}}{% endblock title %}
+
+
 <!-- STYLE BLOCK -->
 {% block style %}
 <style>
@@ -39,10 +52,6 @@
 </style>
 {% endblock style %}
 
-
-
-<!-- TITLE -->
-{% block title %}{{course.title}}{% endblock title %}
 
 
 <!-- NAVBAR -->
