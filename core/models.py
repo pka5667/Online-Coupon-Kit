@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 
@@ -27,3 +28,7 @@ class Udemy_Course(models.Model):
 
     def get_category(self):
         return [str(category) for category in self.category.all()]
+    
+    def get_absolute_url(self):
+        return reverse("course_detail", args=[self.model_title,])
+    

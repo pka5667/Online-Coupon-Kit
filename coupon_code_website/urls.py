@@ -20,10 +20,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
+from django.contrib.sitemaps.views import sitemap
+from core.sitemaps import UdemyCourseSitemap
+
+sitemaps = {
+    'courses': UdemyCourseSitemap
+}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
 
     # for static files
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+
+    # for sitemaps
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

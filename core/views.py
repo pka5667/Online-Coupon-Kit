@@ -106,6 +106,7 @@ def AddCourseView(request):
         response_data = {
             'type': 'course added successfully',
             'title': request.POST.get('title'),
+            'thumbnail_url': request.POST.get('thumbnail_url'),
             'description': request.POST.get('description'), 
             'original_price': request.POST.get('original_price'), 
             'coupon_code': request.POST.get('coupon_code'), 
