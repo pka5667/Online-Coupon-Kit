@@ -30,6 +30,7 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('api/', include('api.urls')),
 
     # for static files
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
